@@ -1,39 +1,40 @@
 import math
-import sys
 
-print("Напишите пожалуйста первый коеффициент")
+print("Введите первый коэффициент")
 a= int(input())
-print("Напишите пожалуйста второй коеффициент")
+print("Введите второй коэффициент")
 b= int(input())
-print("Напишите пожалуйста третий коеффициент")
+print("Введите третий коэффициент")
 c= int(input())
-print("Вы ввели а,b,c ",a,b,c)
-d=b**2-(4*a*c)
-print("Д:",d)
-if d > 0 :
-    x1 = (-b+math.sqrt(d))/(2*a)
-    x2 = (-b-math.sqrt(d))/(2*a)
+print("Находим дискриминант... ")
+D=b**2-(4*a*c)
+print("Дискриминант равен = ",D)
+if D > 0 :
+    x1 = (-b+math.sqrt(D))/(2*a)
+    x2 = (-b-math.sqrt(D))/(2*a)
     if (x1 > 0) and (x2 > 0) :
-        print("4 kornya")
-        x1kon1=math.sqrt(x1)
-        x1kon2=(-x1kon1)
-        print("x1:",x1kon1,"x2;",x1kon2)
-        x2kon1=math.sqrt(x2)
-        x2kon2=(-x2kon1)
-        print("x3:",x2kon1,"x3;",x2kon2)
+        print("Есть 4 корня")
+        x1_1=math.sqrt(x1)
+        x1_2=(-x1_1)
+        print("Первый корень = ",x1_1,"Второй корень = ",x1_2)
+        x2_1=math.sqrt(x2)
+        x2_2=(-x2_1)
+        print("Третий корень = ",x2k_1,"Четвёртый корень = ",x2_2)
     elif x1 < 0 :
-        print("2 kornya")
-        x2kon1=math.sqrt(x2)
-        x2kon2=(-x2kon1)
-        print("x1:",x2kon1,"x2;",x2kon2)
+        print("Есть 2 корня")
+        x2_1=math.sqrt(x2)
+        x2_2=(-x2_1)
+        print("Первый корень = ",x2_1,"Второй корень = ",x2_2)
     elif x2 < 0: 
-        print("2 kornya")
-        x1kon1=math.sqrt(x1)
-        x1kon2=(-x1kon1)
-        print("x1:",x1kon1,"x2;",x1kon2)
+        print("Есть два корня")
+        x1_1=math.sqrt(x1)
+        x1_2=(-x1_1)
+        print("Первый корень = ",x1_1,"Второй корень = ",x1_2)
     elif (x1 < 0) and (x2 < 0) :
-        print("Net korney")
-elif d==0:
-    print("1 корень")
+        print("Нет корней")
+elif D==0:
+    print("Есть 1 корень")
+    x1 = -b/(2*a)
+    print("Он равен = ",x1)
 else:
     print("Нет корней")
