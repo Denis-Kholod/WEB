@@ -1,0 +1,57 @@
+from operator import itemgetter
+
+class Emp:
+    """Жёсткий диск"""
+    def __init__(self, id, vmest, cost, dep_id):
+        self.id = id
+        self.vmest = vmest
+        self.cost = cost
+        self.dep_id = dep_id
+
+class Dep:
+    """Компьютер"""
+    def __init__(self, id, type):
+        self.id = id
+        self.type = type
+
+# Отдел назначения ПК
+deps = [
+    Dep(1, 'Рабочий ПК'),
+    Dep(2, 'Игровой ПК'),
+    Dep(3, 'Домашний компьютер'),
+]
+
+# Жёсткие диски
+emps = [
+    Emp(1, '12 ТБ', 55640, 1),
+    Emp(2, '1 ТБ', 11960, 3),
+    Emp(3, '4 ТБ', 31016, 2),
+    Emp(4, '256 ГБ', 3458, 3),
+    Emp(5, '5 ТБ', 25000, 1),
+]
+
+def main():
+ 
+    one_to_many = [(e.vmest, e.cost, d.type) 
+        for d in deps 
+        for e in emps 
+        if e.dep_id==d.id]
+    
+    print('Вариант 8 - Задание 1')
+    res_1 = sorted(one_to_many, key=itemgetter(2))
+    print(res_1)
+    
+    print('\nВаринат 8 - Задание 2')
+    res_2_unsorted = []
+    for d in deps:
+        d_emps = list(filter(lambda i: i[2]==d.type, one_to_many))        
+        if len(d_emps) > 0:
+            d_costs = [cost for _,cost,_ in d_emps]
+            d_costs_sum = sum(d_costs)
+            res_2_unsorted.append((d.type, d_costs_sum))
+
+    res_2 = sorted(res_2_unsorted, key=itemgetter(1), reverse=True)
+    print(res_2)
+
+if __name__ == '__main__':
+    main()
