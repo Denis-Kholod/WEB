@@ -1,0 +1,21 @@
+body {
+	background-color: orange;
+	color: black;
+}
+
+#otv_face {
+	background-color: red;
+	color: white;
+	width: 150px;
+	margin: 20px;
+}
+
+#my_photo {
+	margin:auto;
+}
+
+.myheader {
+	margin: 20px;
+	font-family: "Courier New";
+	color: green;
+}
