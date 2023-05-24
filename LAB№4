@@ -1,0 +1,65 @@
+from flask import Flask, render_template,request
+from json import dumps as jsonstring
+
+
+app = Flask(__name__)
+
+class Department(object):
+    def __init__(self, name, floor, zavkaf, students,image):
+        self.name = name
+        self.floor = floor
+        self.zavkaf = zavkaf
+        self.students = students
+        self.image = image
+
+    def __str__(self):
+        return("Название: ",self.name,
+                " Этаж:",self.floor,
+                " Завкаф:",self.zavkaf,
+                " число студентов:", self.students,
+                " картинка:", self.image)
+
+class Faculty(object):
+    def __init__(self, name, departments, decan):
+        self.name = name
+        self.departments = departments
+        self.decan = decan
+
+    def __str__(self):
+        return("Название: ",self.name,
+                " Кафедры:",self.departments,
+                " Декан:",self.decan)
+
+dep_sm10 = Department("СМ-10",7,"Котиев Г.О",50,"Leha.png")
+dep_sm9 = Department("СМ-9",3,"Горелов В.А",40,"rem.png")
+dep_sm1 = Department("СМ-1",4,"Завкаф И.И",60,"felix.png")
+
+deps = [dep_sm1,dep_sm9,dep_sm10]
+
+faculty_sm = Faculty("СМ",deps,"Калугин В.Т.")
+
+@app.route("/")
+def hello_world():
+    return render_template('index.html',faculty = faculty_sm)
+
+@app.route("/new_dep")
+def adding():
+    name = request.args.get('name')
+    floor = request.args.get('floor')
+    students = request.args.get('students')
+    zavkaf = request.args.get('zavkaf')
+    new_dep = Department(name,floor,zavkaf,students,"Leha.png")
+    faculty_sm.departments.append(new_dep)
+    return "Добавил"
+
+@app.route("/delete")
+def deleting():
+    name = request.args.get('name')
+    c = 0
+    for d in faculty_sm.departments:
+        if d.name == name:
+            del faculty_sm.departments[c]
+            return "Удалил" + d.name
+        else:
+            c = c + 1
+    return "Не нашёл такую кафедру"
